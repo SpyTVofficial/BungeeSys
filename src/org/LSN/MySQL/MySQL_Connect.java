@@ -1,15 +1,12 @@
 package org.LSN.MySQL;
 
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-
 import java.sql.*;
 import java.text.MessageFormat;
-import java.util.UUID;
 
 public class MySQL_Connect {
 
     public static Connection con;
+    public static String query;
 
     public static void connect() {
         if (!isConnected()) {
@@ -77,14 +74,6 @@ public class MySQL_Connect {
         } catch (SQLException e){
             e.printStackTrace();
             return false;
-        }
-    }
-
-    public static void createPlayer(String name, String uuid, ProxiedPlayer p){
-        UUID uniqueId = p.getUniqueId();
-        String query = MessageFormat.format("INSERT INTO users(NAME, UUID) VALUES ({0}, {1})", name, uniqueId);
-        if(!ifPlayerExist(uuid)){
-            update(query);
         }
     }
 }
