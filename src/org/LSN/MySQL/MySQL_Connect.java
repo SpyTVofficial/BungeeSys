@@ -1,8 +1,10 @@
 package org.LSN.MySQL;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+
+import java.sql.*;
+import java.util.UUID;
 
 public class MySQL_Connect {
 
@@ -43,4 +45,43 @@ public class MySQL_Connect {
         return (con != null);
     }
 
+    public static void update(String query, String s){
+        if(isConnected())
+            try{
+                con.createStatement().executeUpdate(query);
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+    }
+
+    public static ResultSet query(String query) {
+        ResultSet res = null;
+        try {
+            Statement state = con.createStatement();
+            res = state.executeQuery(query);
+        } catch (SQLException e) {
+            connect();
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public static boolean ifPlayerExist(String uuid){
+        try{
+            ResultSet r = query("SELECT * FROM users WHERE UUID= '" + uuid + "'");
+            if(r.next())
+                return (r.getString("UUID") != null);
+            return false;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void createPlayer(String name, String uuid, ProxiedPlayer p){
+        UUID uniqueId = p.getUniqueId();
+        if(!ifPlayerExist(uuid)){
+            update("INSERT INTO users(ID, NAME, UUID) VALUES ('","', '" + ProxyServer.getInstance().getPlayer(UUID.fromString(uuid)).getDisplayName() + "', '" + uniqueId +"'");
+        }
+    }
 }
