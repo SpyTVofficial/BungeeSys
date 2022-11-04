@@ -21,14 +21,18 @@ public class PostLogin implements Listener {
 //        p.setTabHeader((BaseComponent)new TextComponent("), (BaseComponent)new TextComponent("));
         if (Utils.maintenance && !p.hasPermission("System.Wartung.Bypass"))
             p.disconnect("§b§lLittle§f§lSpy§c§lGames§r\n\n§cDer Server befindet sich aktuell im Wartungsmodus!");
-        String uuid = p.getUUID();
+        String uuid = p.getUUID().toString();
         UUID uniqueId = p.getUniqueId();
-        String name = p.getDisplayName();
-        query = MessageFormat.format("INSERT INTO users(NAME, UUID) VALUES ({0}, {1})", name, uuid);
-        try {
-            MySQL_Connect.con.createStatement().executeUpdate(query);
-        } catch (SQLException ex){
-            ex.printStackTrace();
+        String name = p.getDisplayName().toString();
+        query = MessageFormat.format("INSERT INTO users(name, UUID) VALUES (\"{0}\", \"{1}\");", name, uuid);
+        if(!MySQL_Connect.ifPlayerExist(uuid)) {
+            try {
+                MySQL_Connect.con.createStatement().executeUpdate(query);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            return;
         }
     }
 
