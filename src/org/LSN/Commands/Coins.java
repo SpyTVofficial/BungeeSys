@@ -20,7 +20,7 @@ public class Coins extends Command {
         ProxiedPlayer p = (ProxiedPlayer) sender;
             if (args.length == 0) {
             try {
-                String sql = MessageFormat.format("SELECT COINS FROM users WHERE coins= \"{0}\"", coins);
+                String sql = MessageFormat.format("SELECT COINS FROM users WHERE name= \"{0}\"", p.getDisplayName());
                 ResultSet r = MySQL_Connect.query(sql);
                 if(r.next()) {
                     int coinsamount = r.getInt("coins");
