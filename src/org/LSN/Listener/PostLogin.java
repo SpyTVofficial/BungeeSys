@@ -24,7 +24,7 @@ public class PostLogin implements Listener {
         String uuid = p.getUUID().toString();
         UUID uniqueId = p.getUniqueId();
         String name = p.getDisplayName().toString();
-        query = MessageFormat.format("INSERT INTO users(name, UUID) VALUES (\"{0}\", \"{1}\");", name, uuid);
+        query = MessageFormat.format("INSERT INTO users(coins, name, UUID) VALUES ('1500' ,\"{0}\", \"{1}\");", name, uuid);
         if(!MySQL_Connect.ifPlayerExist(uuid)) {
             try {
                 MySQL_Connect.con.createStatement().executeUpdate(query);
