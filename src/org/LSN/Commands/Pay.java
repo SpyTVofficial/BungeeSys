@@ -17,17 +17,17 @@ public class Pay extends Command {
     }
 
     public void execute(CommandSender sender, String[] args) {
-        int amount = Integer.parseInt(args[1]);
         ProxiedPlayer p = (ProxiedPlayer) sender;
         ProxiedPlayer t = ProxyServer.getInstance().getPlayer(args[0]);
+        int amount = Integer.parseInt(args[1]);
         if (args.length != 2) {
             if (t.isConnected()) {
                 try {
-                    String sql = MessageFormat.format("UPDATE `users` ADD `coins` = '50' WHERE `users`.`name` = \"{0}\"", p.getDisplayName());
+                    String sql = MessageFormat.format("SELECT coins FROM users WHERE name=\"{0}\"", p.getDisplayName());
                     ResultSet r = MySQL_Connect.query(sql);
                     if (r.next()) {
                         int coinsamount = r.getInt("coins");
-                        p.sendMessage("§bDu hast aktuell §a" + t.getDisplayName() + amount +  " §bCoins gezahlt!");
+                        p.sendMessage("§bDu hast Spieler §a" + t.getDisplayName() + amount +  " §bCoins gezahlt!");
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();

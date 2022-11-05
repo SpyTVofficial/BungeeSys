@@ -32,6 +32,5 @@ public class Coins extends Command {
         } else {
             p.sendMessage("§cBenutzung: /coins");
         }
-
     }
 }

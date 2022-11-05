@@ -11,7 +11,7 @@ public class MySQL_Connect {
     public static void connect() {
         if (!isConnected()) {
             try {
-                con = DriverManager.getConnection("jdbc:mysql://192.168.178.149:3306/bungee", "mc", "29112005");
+                con = DriverManager.getConnection("jdbc:mysql://172.168.1.111:3306/bungee", "mc", "29112005");
                 System.out.println("MySQL Connection Successful!");
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -34,6 +34,7 @@ public class MySQL_Connect {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `banned` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `muted` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `users` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `name` VARCHAR(100) NOT NULL, `coins` INT(11) NOT NULL, `UUID` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `reports` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `von` VARCHAR(100) NOT NULL, `spieler` VARCHAR(100) NOT NULL, `grund` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -76,4 +77,19 @@ public class MySQL_Connect {
             return false;
         }
     }
+    public static int getBalance(String uuid){
+
+        try{
+            PreparedStatement query = con.prepareStatement("SELECT coins FROM users WHERE name = ?");
+            query.setString(1, uuid.toString());
+            ResultSet rs = query.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("coins");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }
