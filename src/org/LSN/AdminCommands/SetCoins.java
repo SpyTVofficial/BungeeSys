@@ -28,9 +28,9 @@ public class SetCoins extends Command {
                     try {
                         String sql = MessageFormat.format("UPDATE 'users' SET 'coins' = \"{0}\" WHERE 'users'.'name'=\"{1}\"", amount, t);
                         ResultSet r = MySQL_Connect.update(sql);
-                        if (r.next()) {
+                        p.sendMessage("§bDu hast den Kontostand von §a " + t + " §bauf §a" + amount + " §bCoins gesetzt!");
+                        if (r != null && r.next()) {
                             int coinsamount = r.getInt("coins");
-                            p.sendMessage("§bDu hast den Kontostand von §a " + t + "§bauf §a" + coinsamount + " §bCoins gesetzt!");
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
