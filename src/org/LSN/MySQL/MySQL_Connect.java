@@ -1,8 +1,5 @@
 package org.LSN.MySQL;
 
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-
 import java.sql.*;
 import java.text.MessageFormat;
 
@@ -47,13 +44,14 @@ public class MySQL_Connect {
         return (con != null);
     }
 
-    public static void update(String query){
+    public static ResultSet update(String query){
         if(isConnected())
             try{
                 con.createStatement().executeUpdate(query);
             } catch (SQLException e){
                 e.printStackTrace();
             }
+        return null;
     }
 
     public static ResultSet query(String query) {
