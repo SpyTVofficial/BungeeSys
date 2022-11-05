@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 
+import static org.LSN.MySQL.MySQL_Connect.query;
+
 public class Report extends Command {
 
     public Report() {
@@ -57,21 +59,18 @@ public class Report extends Command {
                         TextComponent gotoreport = new TextComponent("§7Klicke um zum Spieler teleporteren");
                         gotoreport.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/goto " + target));
                         team.sendMessage((BaseComponent) gotoreport);
-                        team.sendMessage("");try {
-                            String sql = MessageFormat.format("INSERT INTO reports(von, spieler, grund) VALUES (\"{0}\" ,\"{1}\", \"{2}\");", p.getDisplayName(), team.getDisplayName(), reason);
-                            ResultSet r = MySQL_Connect.query(sql);
-                            if(r.next()) {
-                                int coinsamount = r.getInt("reports");
-                                System.out.print("report logged in db");
-                            }
-                        } catch (SQLException e){
-                            e.printStackTrace();
-                        }
+                        team.sendMessage("");
                     }
                 }
-                p.sendMessage(Utils.rpprefix + "fdeine Hilfe! Dein Report wurde erfolgreich ans Team gesendet!");
+                p.sendMessage(Utils.rpprefix + "§7Danke für deine Hilfe! Dein Report wurde erfolgreich ans Team gesendet!");
+                try {
+                    query = MessageFormat.format("INSERT INTO reports(von, spieler, grund) VALUES (\"{0}\" ,\"{1}\", \"{2}\");", p.getDisplayName(), target, reason);
+                    MySQL_Connect.con.createStatement().executeUpdate(query);
+                } catch (SQLException e){
+                    e.printStackTrace();
+                }
             } else {
-                p.sendMessage(Utils.rpprefix + "ist nicht online!");
+                p.sendMessage(Utils.rpprefix + "§cSpieler ist nicht online!");
             }
         }
     }
