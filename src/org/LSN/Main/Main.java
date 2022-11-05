@@ -2,6 +2,7 @@ package org.LSN.Main;
 
 import net.md_5.bungee.api.plugin.Plugin;
 import org.LSN.AdminCommands.MySQL_Reload;
+import org.LSN.AdminCommands.SetCoins;
 import org.LSN.Commands.Coins;
 import org.LSN.Listener.OnPing;
 import org.LSN.Listener.PostLogin;
@@ -25,6 +26,7 @@ public class Main extends Plugin {
         //Commands
         getProxy().getPluginManager().registerCommand(this, new Coins());
         getProxy().getPluginManager().registerCommand(this, new MySQL_Reload());
+        getProxy().getPluginManager().registerCommand(this, new SetCoins());
         //MySQL
         MySQL_Connect.connect();
         MySQL_Connect.createTable();
