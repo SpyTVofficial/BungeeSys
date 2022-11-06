@@ -35,13 +35,10 @@ public class SetCoins extends Command {
                             try {
                                 String sql = MessageFormat.format("UPDATE 'users' SET 'coins' = \"{0}\" WHERE 'users'.'name'=\"{1}\"", amount, t);
                                 ResultSet r = MySQL_Connect.update(sql);
-                                System.out.println("got old coins: " + r1.getInt("coins"));
-                                System.out.println("new coins set " + amount);
                                 String sql2 = MessageFormat.format("INSERT INTO setcoinslog (admin, spieler, oldcoins, newcoins) VALUES (\"{0}\" ,\"{1}\", {2}, {3});", p.getDisplayName(), t, r1.getInt("coins"), amount);
                                 try{
                                     MySQL_Connect.con.createStatement().executeUpdate(sql2);
                                     p.sendMessage("§bDu hast den Kontostand von §a " + t + " §bauf §a" + amount + " §bCoins gesetzt!");
-                                    System.out.println("newcoins logged");
                                 } catch (SQLException e2){
                                     e2.printStackTrace();
                                 }

@@ -1,4 +1,4 @@
-package org.LSN.Commands;
+package org.LSN.AdminCommands;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -23,10 +23,10 @@ public class Broadcast extends Command {
                 ProxyServer.getInstance().broadcast("§8[§4§lBroadcast§f§8] §2§l" + this.msg);
                 this.msg = "";
             } else {
-                p.sendMessage("/bc <Nachricht>");
+                p.sendMessage("§cBenutzung: /bc <Nachricht>");
             }
         } else {
-            p.sendMessage(Utils.prefix + "Rechte!");
+            p.sendMessage(Utils.prefix + "§cKeine Rechte!");
         }
     }
 }

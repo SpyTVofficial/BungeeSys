@@ -32,6 +32,7 @@ public class MySQL_Connect {
         if (isConnected())
             try {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `banned` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `kicklog` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`admin` VARCHAR(100) NOT NULL, `spieler` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `muted` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `users` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `name` VARCHAR(100) NOT NULL, `coins` INT(11) NOT NULL, `UUID` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `reports` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `von` VARCHAR(100) NOT NULL, `spieler` VARCHAR(100) NOT NULL, `grund` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");

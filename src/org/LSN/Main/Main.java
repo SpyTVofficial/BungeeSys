@@ -1,9 +1,7 @@
 package org.LSN.Main;
 
 import net.md_5.bungee.api.plugin.Plugin;
-import org.LSN.AdminCommands.Goto;
-import org.LSN.AdminCommands.MySQL_Reload;
-import org.LSN.AdminCommands.SetCoins;
+import org.LSN.AdminCommands.*;
 import org.LSN.Commands.Coins;
 import org.LSN.Commands.Report;
 import org.LSN.Listener.OnPing;
@@ -26,8 +24,10 @@ public class Main extends Plugin {
         getProxy().getPluginManager().registerListener(this, new OnPing());
         getProxy().getPluginManager().registerListener(this, new PostLogin());
         //Commands
+        getProxy().getPluginManager().registerCommand(this, new Broadcast());
         getProxy().getPluginManager().registerCommand(this, new Coins());
         getProxy().getPluginManager().registerCommand(this, new Goto());
+        getProxy().getPluginManager().registerCommand(this, new Kick());
         getProxy().getPluginManager().registerCommand(this, new MySQL_Reload());
         getProxy().getPluginManager().registerCommand(this, new Report());
         getProxy().getPluginManager().registerCommand(this, new SetCoins());
