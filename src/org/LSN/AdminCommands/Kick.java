@@ -20,14 +20,15 @@ public class Kick extends Command {
 
     public void execute(CommandSender sender, String[] args) {
         if (sender.hasPermission("System.Kick")) {
-            ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[0]);
+            String targetname = args[0].toString();
+            ProxiedPlayer target = ProxyServer.getInstance().getPlayer(targetname);
             if (args.length == 1) {
                 String noreason = "none";
                 if (args[0].equalsIgnoreCase(target.getDisplayName())) {
                     target.disconnect((BaseComponent) new TextComponent("§b§lLittle§f§lSpy§c§lGames§r\n\n§cDu wurdest vom Netzwerk gekickt! \n\n von " + sender.getName()));
                     sender.sendMessage(Utils.prefix + "§a " + target.getDisplayName() + "§cwurde vom Netzwerk gekickt!");
                     try {
-                        String sql = MessageFormat.format("INSERT INTO kicklog (admin, spieler, reason) VALUES (\"{0}\", \"{1}\", \"{2}\");", sender.getName(), target.getDisplayName(), noreason);
+                        String sql = MessageFormat.format("INSERT INTO kicklog (admin, spieler, reason) VALUES (\"{0}\", \"{1}\", \"{2}\");", sender.getName(), target.getDisplayName().toString(), noreason);
                         System.out.println("kick logged");
                         MySQL_Connect.con.createStatement().executeUpdate(sql);
                     } catch (SQLException e) {
@@ -43,7 +44,7 @@ public class Kick extends Command {
                     String reason = "";
                     for (int i = 1; i < args.length; i++)
                         reason = reason + args[i] + " ";
-                    String sql = MessageFormat.format("INSERT INTO kicklog (admin, spieler, reason) VALUES (\"{0}\" ,\"{1}\", \"{2}\");", sender.getName(), target.getDisplayName(), reason.toString());
+                    String sql = MessageFormat.format("INSERT INTO kicklog (admin, spieler, reason) VALUES (\"{0}\" ,\"{1}\", \"{2}\");", sender.getName(), target.getDisplayName().toString(), reason.toString());
                     target.disconnect((BaseComponent) new TextComponent("§b§lLittle§f§lSpy§c§lGames§r\n\n§cDu wurdest vom Netzwerk gekickt! \n\n §cvon §f" + sender.getName() + "\n\n §cGrund: §f" + reason));
                     sender.sendMessage("§a" + target.getDisplayName() + " §cwurde vom Netzwerk gekickt!");
                     System.out.println("kick logged");

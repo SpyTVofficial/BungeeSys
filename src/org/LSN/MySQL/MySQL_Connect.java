@@ -11,7 +11,7 @@ public class MySQL_Connect {
     public static void connect() {
         if (!isConnected()) {
             try {
-                con = DriverManager.getConnection("jdbc:mysql://172.168.1.111:3306/bungee", "mc", "29112005");
+                con = DriverManager.getConnection("jdbc:mysql://192.168.178.149:3306/bungee", "mc", "29112005");
                 System.out.println("MySQL Connection Successful!");
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -33,6 +33,7 @@ public class MySQL_Connect {
             try {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `banned` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `kicklog` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`admin` VARCHAR(100) NOT NULL, `spieler` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `loggedin` ( `id` INT(11) NOT NULL,`name` VARCHAR(100) NOT NULL, `uuid` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `muted` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `users` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `name` VARCHAR(100) NOT NULL, `coins` INT(11) NOT NULL, `UUID` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `reports` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `von` VARCHAR(100) NOT NULL, `spieler` VARCHAR(100) NOT NULL, `grund` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
