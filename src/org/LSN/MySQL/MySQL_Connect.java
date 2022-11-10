@@ -31,7 +31,7 @@ public class MySQL_Connect {
     public static void createTable() {
         if (isConnected())
             try {
-                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `banned` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `banned` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `admin` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL, `isbanned` BOOLEAN NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `kicklog` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`admin` VARCHAR(100) NOT NULL, `spieler` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `loggedin` ( `id` INT(11) NOT NULL,`name` VARCHAR(100) NOT NULL, `uuid` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `muted` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,`name` VARCHAR(100) NOT NULL, `UUID` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `ende` VARCHAR(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;");
