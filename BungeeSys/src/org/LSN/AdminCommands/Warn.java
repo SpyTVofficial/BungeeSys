@@ -26,10 +26,10 @@ public class Warn extends Command {
                     String sql = MessageFormat.format("INSERT INTO warns (admin, spieler, reason) VALUES (\"{0}\", \"{1}\", \"{2}\");", t.getDisplayName(), p.getDisplayName(), reason);
                     ResultSet r = MySQL_Connect.query(sql);
                     if (r.next()) {
-                        p.sendMessage("§bSpieler §a" + t.getDisplayName() + " §berfolgreich gewarned! Grund: §a" + reason);
+                        p.sendMessage("§bSpieler §a" + t.getDisplayName() + "§berfolgreich gewarned! Grund: §b" + reason);
                         for (ProxiedPlayer team : ProxyServer.getInstance().getPlayers()){
                             if(team.hasPermission("System.Team")){
-                                p.sendMessage("§a" + p.getDisplayName() + " §bhat Spieler §a" + t.getDisplayName() + " §bgewarned! Grund: §a" + reason);
+                                p.sendMessage("§a" + p.getDisplayName() + " §bhat Spieler §a" + t.getDisplayName() + " §bgewarned! Grund: §b" + reason);
                             }
                         }
                     }
